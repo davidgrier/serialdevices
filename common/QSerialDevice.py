@@ -245,7 +245,6 @@ class QSerialDevice(QSerialPort):
         try:
             self.readyRead.disconnect()
         except Exception as ex:
-            print(ex)
             pass
         if not self._sync:
             self.readyRead.connect(self.receive)

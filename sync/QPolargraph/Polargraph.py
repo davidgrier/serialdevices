@@ -41,7 +41,8 @@ class Motors(QSerialDevice):
     def __init__(self):
         super(Motors, self).__init__(eol='\n',
                                      manufacturer='Arduino',
-                                     timeout=1000)
+                                     timeout=1000,
+                                     sync=True)
 
     def identify(self):
         logger.info(' Waiting for Arduino serial port')
@@ -66,7 +67,7 @@ class Motors(QSerialDevice):
             Index of motor 2
         '''
         logger.debug(' goto {} {}'.format(n1, n2))
-        self.send('G:%d:%d' % (n1, n2))
+        self.handshake('G:%d:%d' % (n1, n2))
 
     def home(self):
         '''Move to home position'''
@@ -74,7 +75,7 @@ class Motors(QSerialDevice):
 
     def release(self):
         '''Stop and release motors'''
-        self.send('S')
+        self.handshake('S')
 
     def running(self):
         '''Returns True if motors are running'''
@@ -102,7 +103,7 @@ class Motors(QSerialDevice):
 
     @indexes.setter
     def indexes(self, n1, n2):
-        self.send('P:%d:%d' % (n1, n2))
+        self.handshake('P:%d:%d' % (n1, n2))
 
     @property
     def motor_speed(self):
@@ -253,12 +254,9 @@ if __name__ == '__main__':
     import sys
 
     app = QApplication(sys.argv)
-    motors = Polargraph()
+    motors = Motors()
     print('Current position: {}'.format(motors.indexes))
-    motors.goto(0.01, -0.01)
     w = QWidget()
     w.show()
-    while (motors.running):
-        print('.')
     motors.close()
     sys.exit(app.exec_())
