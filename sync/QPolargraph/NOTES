@@ -1,0 +1,17 @@
+Preparing Arduino with Adafruit MotorShield v.2 to control a polargraph
+
+Install Arduino programming environment:
+1. http://www.arduino.cc
+
+Load the acam2 sketch onto the Arduino
+1. Run Arduino IDE
+2. Open acam2.ino: File->Open <src dir>/qacam/polargraph/acam2
+3. First time: Install libraries to control Adafruit Motorshield V2
+   Sketch->Include Library->Manage Libraries 
+   a) AccelStepper
+   b) Adafruit Motor Shield V2 Library
+4. Verify code (click check under File menu)
+5. Connect to Arduino: Tools->Port
+   Choose port that identifies Arduino.
+   Verify with: Tools->Get BoardInfo
+6. Load code onto Arduino (click -> under Edit menu)
