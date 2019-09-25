@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from common.QSerialDevice import QSerialDevice
+from serialdevices.common.QSerialDevice import QSerialDevice
 import numpy as np
 from time import sleep
 
